@@ -271,6 +271,7 @@ function dragDrop(e){
         todo.removeChild(e)
         todo.insertBefore(e,todo.children[result])
         setDatasetItem()
+        window.localStorage.setItem("todo",todo.innerHTML)
     })
 }
 
