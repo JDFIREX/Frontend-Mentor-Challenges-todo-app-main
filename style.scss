@@ -1,0 +1,147 @@
+// light theme
+$VeryLightGray: hsl(0, 0%, 98%);
+$VeryLightGrayishBlue: hsl(236, 33%, 92%);
+$LightGrayishBlueWhite: hsl(233, 11%, 84%);
+$DarkGrayishBlueWhite: hsl(236, 9%, 61%);
+$VeryDarkGrayishBlueWhite: hsl(235, 19%, 35%);
+// dark theme
+$VeryDarkBlue: hsl(235, 21%, 11%);
+$VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+$LightGrayishBlue: hsl(234, 39%, 85%);
+$DarkGrayishBlue: hsl(234, 11%, 52%); 
+$VeryDarkGrayishBlue: hsl(233, 14%, 35%); 
+$VeryDarkGrayishBlue2: hsl(237, 14%, 26%); 
+$LightGrayishBluehover: hsl(236, 33%, 92%);
+// primary color
+$BrightBlue: hsl(220, 98%, 61%);
+$CheckBackground: linear-gradient(to right bottom, #57ddff, #00c9ff, #03afff, #7a8cff, #c058f3);
+
+*{margin: 0; padding: 0;box-sizing: border-box;font-family: 'Josefin Sans', sans-serif;}
+
+body{position: relative;font-weight: 400;font-size: 18px;width:100%;min-height: 100vh;height: auto;overflow-x: hidden;display: flex;flex-direction: column;align-items: center;background-color: $VeryDarkBlue;}
+
+.bg_img{position: absolute;top: 0;left: 0;width:100%;height:300px;z-index: -1;background-image: url("images/bg-desktop-dark.jpg");background-position: center;background-repeat: no-repeat;background-size: 100% 100%;}
+
+main{position: relative; top: 5.5vw;width:34rem;
+    header{width:100%;display: flex;flex-direction: row;justify-content: space-between;
+        h1{letter-spacing: 1rem;font-size: 2.5rem;color: $LightGrayishBluehover;}
+        .mode{width:26px;height:26px;background-image: url("images/icon-sun.svg");background-position: center;background-repeat: no-repeat;background-size: 100% 100%;transition: .3s ease-in-out all;}}
+    .create{width:100%;margin-top: 2.5rem;border-radius: .5rem;display: flex;flex-direction: row;padding: 1.25rem 0;background-color: $VeryDarkDesaturatedBlue;box-shadow: 0px 10px 50px -15px black;
+        .checkbox{border-radius: 9in;width:1.5rem;height:1.5rem;margin: 0 1.3rem;border:1px solid $VeryDarkGrayishBlue2;}
+        .checked{background-image: url("images/icon-check.svg");background-position: 55% 55%;background-repeat: no-repeat;background-size: 50%;background-color: $BrightBlue;border:0;}
+        .create_input{background-color: transparent;border:none;outline: none;text-decoration: none;color:$LightGrayishBlue;width:26rem;font-size: 1.1rem;
+            &::placeholder{color: $DarkGrayishBlue;font-size: 1.1rem;}}
+        .btn{padding:0 1.2rem;background-image: url("images/icon-check.svg");background-position: center;background-repeat: no-repeat;background-size: 1rem 1rem;}}
+    .todo{margin-top:1.5rem;box-shadow: 0px 60px 100px -15px black;z-index: 2;
+        .todo_item{position: relative;width:100%;display: flex;flex-direction: row;align-items: center;padding: 1.23rem 0;border-bottom:1px  solid $VeryDarkGrayishBlue2;background-color: $VeryDarkDesaturatedBlue;
+            .bg_checkbox{position: relative;border-radius: 9in;width:1.5rem;height:1.5rem;margin: 0 1.3rem;display: flex;align-items: center;justify-content: center;
+                .item_checkbox{position: relative;border-radius: 9in;width:100%;height:100%;border:1px solid $VeryDarkGrayishBlue2;background-color: $VeryDarkDesaturatedBlue;}
+                &:hover{transition: .2s ease-in-out all;background-image: $CheckBackground;transform: scale(108%);
+                    .item_checkbox{border:0;width: 95%;height:95%;}}}
+            .checked{background-image: $CheckBackground;
+                .item_checkbox{background-image: url("images/icon-check.svg");background-position: 55% 60%;background-repeat: no-repeat;background-size: 50%;background-color: transparent;border:0;}
+                &:hover{transition: .2s ease-in-out all;background-image: $CheckBackground;transform: none;
+                    .item_checkbox{border:0;width: 100%;height:100%;}}}
+            .item_p{color:$LightGrayishBlue;width:26rem;font-size: 1.1rem;
+                &:hover{color: $LightGrayishBluehover;}}
+            .item_p_completed{color:$VeryDarkGrayishBlue;width:26rem;font-size: 1.1rem;text-decoration: line-through;
+                &:hover{color:$VeryDarkGrayishBlue;}}
+            .item_btn{background-color: transparent;outline:none;border:none;display: none;text-decoration: none;
+                img{width:1.2rem;height:1.2rem;}}
+        }
+        .todo_item:nth-child(1){border-radius: .5rem .5rem 0 0;}
+        .todo_item:hover{.item_btn{display: block;}}}
+    .todo_nav{width:100%;display: flex;flex-direction: row;align-items: center;padding:1.2rem 1.5rem 1rem;font-size: .9rem;background-color: $VeryDarkDesaturatedBlue;border-radius:0 0 .5rem .5rem;
+        .count_p{color: $DarkGrayishBlue;}
+        .todo_nav_s{display: flex;flex-direction: row;background-color: $VeryDarkDesaturatedBlue;
+            .all_p{color: $BrightBlue;margin-left: 5.8rem;font-weight: 700;}
+            .active_p{font-weight: 700;margin-left: 1rem;color: $DarkGrayishBlue;
+                &:hover{color:$LightGrayishBluehover;}}
+            .completed_p{font-weight: 700;margin-left: 1rem;color: $DarkGrayishBlue;
+                &:hover{color:$LightGrayishBluehover;}}}
+        .clear_p{font-size: .85rem;margin-left: 3.4rem;color: $DarkGrayishBlue;
+            &:hover{color:$LightGrayishBluehover;}}}}
+
+footer{position: relative; top: 10rem;font-size: .8rem;margin-bottom: 10rem;font-weight: 700;color:$VeryDarkGrayishBlue;}
+
+.white_body{background-color: $VeryLightGray;}
+
+.white{background-color: transparent;
+    header{h1{color: $VeryLightGray;}.mode{background-image: url("images/icon-moon.svg");}}
+    .create{background-color: $VeryLightGray;box-shadow: none;
+        .checkbox{border:1px solid $VeryLightGrayishBlue;}
+        .create_input{color:$VeryDarkGrayishBlueWhite;&::placeholder{color: $DarkGrayishBlueWhite;}}
+        .btn{background-image: url("images/icon-check-dark.svg");}}
+        .todo{box-shadow: 0px 60px 100px -15px $DarkGrayishBlueWhite;
+            .todo_item{border-bottom:1px  solid $VeryLightGrayishBlue;background-color: $VeryLightGray;
+                .bg_checkbox{
+                    .item_checkbox{border:1px solid $VeryLightGrayishBlue;background-color: $VeryLightGray;}
+                    &:hover{background-image: $CheckBackground;}}
+                .checked{background-image: $CheckBackground;
+                    .item_checkbox{background-image: url("images/icon-check.svg");background-position: 55% 55%;background-repeat: no-repeat;background-size: 50%;background-color: transparent;border:0;}
+                    &:hover{transition: .2s ease-in-out all;background-image: $CheckBackground;transform: none;
+                        .item_checkbox{border:0;width: 100%;height:100%;}}}
+                .item_p{color:$VeryDarkGrayishBlueWhite;&:hover{color: $VeryDarkGrayishBlueWhite;}}
+                .item_p_completed{color:$LightGrayishBlueWhite;&:hover{color:$LightGrayishBlueWhite;}}}}
+        .todo_nav{background-color: $VeryLightGray;
+            .count_p{color: $DarkGrayishBlueWhite;}
+            .todo_nav_s{background-color: $VeryLightGray;
+                .all_p{color: $BrightBlue;}
+                .active_p{color: $DarkGrayishBlueWhite;
+                    &:hover{color:$VeryDarkGrayishBlueWhite;}}
+                .completed_p{color: $DarkGrayishBlueWhite;
+                    &:hover{color:$VeryDarkGrayishBlueWhite;}}}
+            .clear_p{color: $DarkGrayishBlueWhite;
+                &:hover{color:$VeryDarkGrayishBlueWhite;}}}}
+
+.white_footer{color:$DarkGrayishBlueWhite;}
+
+@media only screen and (max-width:700px){
+    .bg_img{height:53vw;background-image: url("images/bg-mobile-dark.jpg");}
+    main{top: 13vw;width:88vw;
+        header{
+            h1{letter-spacing: 1.1rem;font-size: 5vw;}
+            .mode{width:5vw;height:5vw;}}
+        .create{margin-top: 11vw;padding: 3.3vw 0;
+            .checkbox{width:5vw;height:5vw;margin: 0 3.5vw 0 6vw;}
+            .create_input{width:64vw;font-size: 3vw;
+                &::placeholder{font-size: 3vw;}}
+            .btn{width:4vw;height:4vw;background-size: 4vw;}}
+        .todo{margin-top:4.2vw;
+            .todo_item{padding: 4.5vw 3vw 4.5vw 0;
+                .bg_checkbox{width:5vw;height:5vw;margin: 0 3.5vw 0 6vw;}
+                .item_p{width:61vw;font-size: 3vw;}
+                .item_p_completed{width:61vw;font-size: 3vw;}
+                .item_btn{display: block;margin-left: .5rem;
+                    img{width:4vw;height:4vw;}}}}
+        .todo_nav{justify-content: space-between;padding:5vw 5vw;font-size: 3vw;
+            .todo_nav_s{position: absolute;left:0;margin-top: 35vw;width:88vw;padding:4.2vw 5vw;display: flex;justify-content: center;border-radius: .5rem; box-shadow: 0px 10px 50px -15px black;
+                .all_p{font-weight: 700;margin: 0 3vw;font-size: 3.5vw;}
+                .active_p{margin: 0 1.5vw;font-size: 3.5vw;font-weight: 700;}
+                .completed_p{font-weight: 700;margin: 0 1vw;font-size: 3.5vw;}}
+            .clear_p{font-size: 3vw;margin-left: 0rem;}}}
+    footer{position: relative; top: 45vw;margin-top:0rem;font-size: 2.5vw;margin-bottom: 15vw;}
+}
+@media only screen and (max-width:700px){
+    .white{.todo_nav{.todo_nav_s{box-shadow: 0 10px 50px -15px $DarkGrayishBlueWhite;}}}
+}
+@media only screen and (max-width:320px){
+    main{
+        header{h1{letter-spacing: 3vw;font-size: 7vw;}.mode{width:7vw;height:7vw;}}
+        .create{
+            .checkbox{width:6vw;height:6vw;}
+            .create_input{font-size: 4.5vw;&::placeholder{font-size: 4.5vw;}}
+            .btn{width:5.5vw;height:5.5vw;background-size: 5.5vw;}}
+        .todo{.todo_item{padding: 4.5vw 3vw 4.5vw 0;
+                .bg_checkbox{width:6vw;height:6vw;}
+                .item_p{font-size: 4.5vw;}
+                .item_p_completed{font-size: 4.5vw;}
+                .item_btn{img{width:5vw;height:5vw;}}}}
+        .todo_nav{font-size: 4.5vw;
+            .todo_nav_s{
+                .all_p{margin: 0 4vw;font-size: 4.5vw;}
+                .active_p{margin: 0 2vw;font-size: 4.5vw;}
+                .completed_p{margin: 0 2vw;font-size: 4.5vw;}}
+            .clear_p{font-size: 4.5vw;}}}
+    footer{position: relative; top: 45vw;font-size: 3.5vw;margin-bottom: 10vw}
+}
