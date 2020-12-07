@@ -81,7 +81,6 @@ function createTodoItem(val){
         item.dataset.checked = false;
         item.dataset.focus = false;
         item.draggable = true;
-        item.setAttribute("ondrag","dragTouch(this)")
         item.setAttribute("ondragstart","drag(this)")
         item.setAttribute("ondragend","dragDrop(this)")
         item.setAttribute("onclick","focusItem(this)")
@@ -274,9 +273,3 @@ function dragDrop(e){
     })
 }
 
-
-// touch drag
-
-function dragTouch(e){
-    console.log(e)
-}
