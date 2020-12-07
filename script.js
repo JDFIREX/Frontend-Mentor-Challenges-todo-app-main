@@ -73,6 +73,7 @@ function todoCreate(e){
     createTodoInput.value = "";
     val.length == 0 ? alert("u can not pass a empty todo") : createTodoItem(val);
 }
+
 function createTodoItem(val){
     let createItem = new Promise(result => {
         let item = document.createElement('div');
