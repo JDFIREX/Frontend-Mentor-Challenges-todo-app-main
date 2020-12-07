@@ -2,6 +2,9 @@ window.addEventListener('load',(e) => {
     document.querySelector('.todo').innerHTML = localStorage.getItem('todo');
     itemsLeft()
     setDatasetItem()
+    for(let i = 0; i < todo.childElementCount ;i++){
+        focusSet(todo.children[i],"0",false)
+    }
 })
 
 // dark mode / light mode 
