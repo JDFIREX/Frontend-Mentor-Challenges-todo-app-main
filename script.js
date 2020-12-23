@@ -2,9 +2,6 @@ window.addEventListener('load',(e) => {
     document.querySelector('.todo').innerHTML = localStorage.getItem('todo');
     itemsLeft()
     setDatasetItem()
-    for(let i = 0; i < todo.childElementCount ;i++){
-        focusSet(todo.children[i],"0",false)
-    }
 })
 
 // dark mode / light mode 
@@ -81,10 +78,6 @@ function createTodoItem(val){
         item.dataset.item = todoItem;
         item.dataset.checked = false;
         item.dataset.focus = false;
-        item.draggable = true;
-        item.setAttribute("ondragstart","drag(this)")
-        item.setAttribute("ondragend","dragDrop(this)")
-        item.setAttribute("onclick","focusItem(this)")
         item.innerHTML = `
         <div class="bg_checkbox" onclick="clicked(this)">
             <div class="item_checkbox"></div>
@@ -94,7 +87,6 @@ function createTodoItem(val){
         `;
         if(check){
             clicked(item.querySelector(".bg_checkbox"))
-            focusItem(item)
             item.dataset.checked = true;
             check = false;
         } 
@@ -114,7 +106,6 @@ function createTodoItem(val){
 function clicked(e){
     const parent = e.parentNode;
     const parentChecked = parent.dataset.checked;
-    focusItem(parent)
 
     if(parentChecked == "true"){
         parent.dataset.checked = false;
@@ -142,7 +133,6 @@ function deleteItem(e){
     window.localStorage.setItem("todo",todo.innerHTML)
 }
 
-
 // count items 
 function itemsLeft(){
     let c = 0;
@@ -153,56 +143,34 @@ function itemsLeft(){
 }
 
 
-// focus todo item
-function focusItem(e){
-    e.dataset.focus == "false" ? focusSet(e,"1px solid red",true) : focusSet(e,"0",false);
-}
-
-
 // button all
 let all = document.querySelector(".all_p");
-
-all.addEventListener("click",(e) => {
-    let list = [...todo.children];
-    let l = list.every(a => a.dataset.focus == "true");
-    if(!l){
-        for(let i = 0 ; i < todo.childElementCount; i++){
-            focusSet(todo.children[i],"1px solid red",true)
-        } 
-    }else{
-        for(let i = 0 ; i < todo.childElementCount; i++){
-            focusSet(todo.children[i],"0",false)
-        }   
-    }
-})
-
-function focusSet(t,b,f){
-    t.style.borderLeft = b;
-    t.dataset.focus = f;
-}
+all.addEventListener('click', (e) => select(all,"xxx"))
 
 
 // active
 let active = document.querySelector(".active_p");
-select(active,"true")
+active.addEventListener('click', (e) =>select(active,"true"))
 
 
 // completed 
 let completed = document.querySelector(".completed_p")
-select(completed,"false")
+completed.addEventListener('click', (e) =>select(completed,"false"))
 
-// select function 
-function select(c,b){
-    c.addEventListener('click',() => {
-        for(let i = 0 ; i < todo.childElementCount; i++){
-            if(todo.children[i].dataset.focus == "true" && todo.children[i].dataset.checked == b ) {
-                clicked(todo.children[i].querySelector(".bg_checkbox"));
-                focusItem(todo.children[i]) 
+function select(b,c){
+    console.log(b)
+    if(c == "xxx"){
+        b.addEventListener("click",(e) => {
+            for(let i = 0 ; i < todo.childElementCount ; i++){
+                todo.children[i].style.display = "flex";
             }
+        })
+    }else{
+        for(let i = 0; i < todo.childElementCount ; i++){
+            todo.children[i].dataset.checked == c ? todo.children[i].style.display= "none" : todo.children[i].style.display= "flex";
         }
-    })
+    }
 }
-
 
 // clear completed 
 let clearBtn = document.querySelector(".clear_p");
@@ -216,13 +184,11 @@ clearBtn.addEventListener("click",(e) => {
         }
         resolve(index)
     })
-
     findChecked.then(result => {
         result.map(a => {
             todo.removeChild(a);
             todoItem--;
         })
-
         todo.childElementCount == 0 ? todoNavSet("0",true) : null;
         setDatasetItem()
         window.localStorage.setItem("todo",todo.innerHTML)
@@ -236,7 +202,6 @@ function todoNavSet(o,b){
     todoEmpty = b;
 }
 
-
 // set dataset Item list
 function setDatasetItem(){
     for(let i = 0; i < todo.childElementCount; i++){
@@ -244,34 +209,9 @@ function setDatasetItem(){
     }
 }
 
-
 // drag and move todo item 
-let pushFrom = 0;
-let start = 0;
-
-function drag(e){
-    start = window.event.y
-    pushFrom = Number(e.dataset.item);
-}
-function dragDrop(e){
-
-    let dragMath = new Promise(resolve => {
-
-        let itemHeight = Math.floor(e.getBoundingClientRect().height);
-        let end = window.event.y;
-        let over = Number(Math.floor((end - start) / itemHeight));
-        over < 0 ? over++ : null;
-        let pushTo = Number(pushFrom + (over));
-        pushTo < 0 ? pushTo = 0 : pushTo >= todoItem ? pushTo = todoItem - 1: pushTo = pushTo;
-        resolve(pushTo)
-
-    })
-
-    dragMath.then(result => {
-        todo.removeChild(e)
-        todo.insertBefore(e,todo.children[result])
-        setDatasetItem()
-        window.localStorage.setItem("todo",todo.innerHTML)
-    })
-}
+let bg = 0;
+new Sortable(todo, {
+    animation: 150
+});
 
